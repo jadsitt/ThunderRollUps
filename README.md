@@ -29,7 +29,7 @@ Note: you want to ensure that the total record count is equal to the record coun
 
 After you have created the recipe, you will need to create a dataset schedule for it to produce the data. 
 This is much like creating a materialized view, report or the like.
-
+![Test Image 1](ScheduleRecipe.png)
 
 
 # Step 3 - Setup the
