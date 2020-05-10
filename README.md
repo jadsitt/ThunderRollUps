@@ -52,20 +52,23 @@ New Child SObject (RU_Field_Mapper__c) / source api name, target api name, data 
 
 # Technical Details  
 ```java
-String query;                           //0Fc1U000007O0s4SAC Stat_Account_Total_Units
+// Grab the object rollup data set
+// get the id's
+// build the query based on batch size (offset is available)
+
+String query;
 query = 'q = load "0Fb1U0000001FZgSAM/0Fc1U000007O0s4SAC";';
 query += 'q = foreach q generate \'Id\' as \'Id\', \'Propert_Units_c_SUM\' as \'Propert_Units_c_SUM\', \'Property_Count__c\' as \'Property_Count__c\';';
 query += 'q = limit q 2000;';
+
 ConnectApi.LiteralJson queryresult =  ConnectApi.Wave.executeQuery(query);
 
 String response = queryresult.json;
-Map<String,Object> q = (Map<String,Object>) JSON.deserializeUntyped(response);
-response = null;
+Map<String,Object> q = (Map<String,Object>) JSON.deserializeUntyped(response); 
+response = null; // decrease heap
 q = (Map<String,Object>) q.get('results');
 List<Object> recordlist =  (List<Object>) q.get('records');
 Map<Id, Integer> sumlist = new Map<Id, Integer>(); 
-
-system.debug(recordlist.size());
 
 String recId;
 Integer sum;
@@ -74,24 +77,22 @@ Map<String,Object> rowJSON;
 SObject sobj; 
 sobj = Schema.getGlobalDescribe().get('Account').newSObject() ;
 List<SObject> slist = new List<SObject>();
-Integer x = 0; 
 Integer pcount;
 for(Object record : recordlist){
-    x++; 
+
     SObject s2 = sobj.Clone(true,false); // Shallow.. 
     rowJSON = ((Map<String,Object>) JSON.deserializeUntyped(JSON.serialize(record))); //get a map
     recId = (String) rowJSON.get('Id'); // pulll the Id
-    sum = (Integer) rowJSON.get('Propert_Units_c_SUM'); // Loop on the Fields
-    pcount = (Integer) rowJSON.get('Property_Count__c');
+    
     s2.put('Id', recId);
-    s2.put('Units_Owned__c', sum);
-    s2.put('Property_Count__c', pcount);
+    // Loop over each field child object ( // Note typeconversion logic would be here
+        sum = (Integer) rowJSON.get('Propert_Units_c_SUM'); // Loop on the Fields
+        pcount = (Integer) rowJSON.get('Property_Count__c');
+        s2.put('Units_Owned__c', sum);
+        s2.put('Property_Count__c', pcount);
     slist.add(s2);
 }
-
-
 update slist ; // accts; 
-
 ```
 
 Confirm Data is flowing
