@@ -1,7 +1,7 @@
 # ThunderRollUps
 Salesforce Roll-Up Helper for Einstein
 
-This is an example codebase created to demonstrate how to push aggregate and predictive data from an Einstein Dataset back into salesforce. 
+This is an example codebase created to demonstrate how to push aggregate and predictive data from an Einstein Dataset back into salesforce. It is not abstracted or bulkified, but the psudo code commentary notes where the changes would go.
 
 # Example Problem Scope
 
