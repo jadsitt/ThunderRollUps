@@ -34,16 +34,24 @@ This is much like creating a materialized view, report or the like. You can also
 Confirm the dataset is being produced (you can also explore it)
 ![Test Image 1](ConfirmDataSetProduction.PNG)
 
-# Step 3 - Setup the
+Explore it via the dataset exploration drop down to confirm the data looks correct. 
+![Test Image 1](explore.PNG)
+
+You can also get the dataset id and version ids from workbench
+![Test Image 1](Workbench.PNG)
 
 
+# Step 3 - Setup the Custom Object to be processed
+New SObject (RU_Object_Settings__c) / object name, batch count, start time, status, error text, next time isActive, datasetname/id/version
 
 # Step 4 - Choose the object fields for replication
+New Child SObject (RU_Field_Mapper__c) / source api name, target api name, data type
 
 # Step 4 - Schedule an apex job to run on a schedule so it will import the data
 
-# Technical Details  
 
+# Technical Details  
+```java
 String query;                           //0Fc1U000007O0s4SAC Stat_Account_Total_Units
 query = 'q = load "0Fb1U0000001FZgSAM/0Fc1U000007O0s4SAC";';
 query += 'q = foreach q generate \'Id\' as \'Id\', \'Propert_Units_c_SUM\' as \'Propert_Units_c_SUM\', \'Property_Count__c\' as \'Property_Count__c\';';
@@ -84,3 +92,4 @@ for(Object record : recordlist){
 
 update slist ; // accts; 
 
+```
