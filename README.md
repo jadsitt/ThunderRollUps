@@ -22,9 +22,19 @@ Sum(Unit Count)
 # Step 1 - Get the Data into Einstein
 To import the data objects from salesforce into einstein by connecting them and setting a synchronization schedule. 
 ![Test Image 1](ConnectData.PNG)
-# Step 2 - Create a recipie for the aggregations and schedule it to run after the synchronization occurs
 
-# Step 3 - Set the object up for replication
+# Step 2 - Create an aggregate recipe for the values you want computed
+Note: you want to ensure that the total record count is equal to the record count in salesforce to ensure your logic is correct.
+![Test Image 1](Recipe.PNG)
+
+After you have created the recipe, you will need to create a dataset schedule for it to produce the data. 
+This is much like creating a materialized view, report or the like.
+
+
+
+# Step 3 - Setup the
+
+
 
 # Step 4 - Choose the object fields for replication
 
