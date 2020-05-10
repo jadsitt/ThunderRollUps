@@ -53,8 +53,8 @@ New Child SObject (RU_Field_Mapper__c) / source api name, target api name, data 
 # Technical Details  
 ```java
 // Grab the object rollup data set
-// get the id's
-// build the query based on batch size (offset is available)
+// get the data set id and version id from name based on rest api above.
+// build the query based on batch size (offset is available) and field mapping objects that are active
 
 String query;
 query = 'q = load "0Fb1U0000001FZgSAM/0Fc1U000007O0s4SAC";';
@@ -80,7 +80,7 @@ List<SObject> slist = new List<SObject>();
 Integer pcount;
 for(Object record : recordlist){
 
-    SObject s2 = sobj.Clone(true,false); // Shallow.. 
+    SObject s2 = sobj.Clone(true,false); // Shallow clone of object w/o any fields, so new values will be overwritten
     rowJSON = ((Map<String,Object>) JSON.deserializeUntyped(JSON.serialize(record))); //get a map
     recId = (String) rowJSON.get('Id'); // pulll the Id
     
