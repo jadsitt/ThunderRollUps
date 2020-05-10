@@ -93,3 +93,8 @@ for(Object record : recordlist){
 update slist ; // accts; 
 
 ```
+
+Confirm Data is flowing
+
+![Test Image 1](dataflowing.PNG)
+
