@@ -21,7 +21,7 @@ Sum(Unit Count)
 
 # Step 1 - Get the Data into Einstein
 To import the data objects from salesforce into einstein by connecting them and setting a synchronization schedule. 
-
+![Test Image 1](ConnectData.png)
 # Step 2 - Create a recipie for the aggregations and schedule it to run after the synchronization occurs
 
 # Step 3 - Set the object up for replication
